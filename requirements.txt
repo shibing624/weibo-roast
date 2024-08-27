@@ -1,0 +1,8 @@
+agentica
+lxml
+requests
+tqdm
+openai
+loguru
+pandas
+rapidfuzz
