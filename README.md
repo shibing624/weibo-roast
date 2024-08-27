@@ -4,7 +4,7 @@
 微博吐槽（weibo-roast）是一个微博毒舌AI，集成了微博数据抓取、处理、分析和生成幽默毒舌评论的功能。
 
 1. 通过`weibo-crawler.py`爬取指定博主的近30条微博
-2. 调用 LLM 模型生成对微博博主的刻薄"吐槽"
+2. 基于爬取的微博和评论，调用 LLM 对微博博主刻薄"吐槽"
 
 ## Demo
 
@@ -19,7 +19,7 @@ Demo: [http://180.76.159.247:8501/](http://180.76.159.247:8501/)
 pip install -r requirements.txt
 cp .env.example ~/.agentica/.env
 ```
-并编辑 `~/.agentica/.env` 文件，填写LLM的api key(如：`DEEPSEEK_API_KEY`或者`MOONSHOT_API_KEY`）。
+编辑 `~/.agentica/.env` 文件，填写LLM的api key(如：`DEEPSEEK_API_KEY`或者`MOONSHOT_API_KEY`）。
 
 ### 2. 启动streamlit
 ```shell
