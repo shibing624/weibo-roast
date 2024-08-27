@@ -7,9 +7,10 @@
 2. 调用 LLM 模型生成对微博博主的刻薄"吐槽"
 
 ## Demo
-![demo](https://github.com/shibing624/weibo-roast/blob/main/docs/dazhagnwei.png)
 
-Offical demo: [http://180.76.159.247:8501/](http://180.76.159.247:8501/)
+Demo: [http://180.76.159.247:8501/](http://180.76.159.247:8501/)
+
+<img src="https://github.com/shibing624/weibo-roast/blob/main/docs/dazhagnwei.png" width="600" />
 
 ## 快速开始
 
