@@ -46,7 +46,7 @@ streamlit run st.py
 
 ## Citation
 
-如果你在研究中使用了`agentica`，请按如下格式引用：
+如果你在研究中使用了`weibo-roast`，请按如下格式引用：
 
 APA:
 
