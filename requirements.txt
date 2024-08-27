@@ -1,4 +1,4 @@
-agentica
+agentica>=0.1.2
 lxml
 requests
 tqdm
