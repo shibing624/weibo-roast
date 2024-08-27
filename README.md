@@ -17,9 +17,9 @@ Demo: [http://180.76.159.247:8501/](http://180.76.159.247:8501/)
 ### 1. 安装依赖项
 ```shell
 pip install -r requirements.txt
-cp .env.example .env
+cp .env.example ~/.agentica/.env
 ```
-并编辑 `.env` 文件，填写LLM的api key(如：`DEEPSEEK_API_KEY`或者`MOONSHOT_API_KEY`）。
+并编辑 `~/.agentica/.env` 文件，填写LLM的api key(如：`DEEPSEEK_API_KEY`或者`MOONSHOT_API_KEY`）。
 
 ### 2. 启动streamlit
 ```shell
