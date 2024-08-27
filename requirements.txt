@@ -5,3 +5,4 @@ tqdm
 openai
 loguru
 pandas
+streamlit
