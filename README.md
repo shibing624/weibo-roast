@@ -6,16 +6,25 @@
 1. 通过`weibo-crawler.py`爬取指定博主的近30条微博
 2. 调用 LLM 模型生成对微博博主的刻薄"吐槽"
 
+## Demo
+![demo](https://github.com/shibing624/weibo-roast/blob/main/docs/dazhagnwei.png)
+
+Offical demo: [http://180.76.159.247:8501/](http://180.76.159.247:8501/)
+
 ## 快速开始
 
-![demo](https://github.com/user-attachments/assets/bbcf26bd-2072-429c-9b50-876adfa6d9e8)
-
-
+### 1. 安装依赖项
 ```shell
 pip install -r requirements.txt
 cp .env.example .env
+```
+并编辑 `.env` 文件，填写LLM的api key(如：`DEEPSEEK_API_KEY`或者`MOONSHOT_API_KEY`）。
+
+### 2. 启动streamlit
+```shell
 streamlit run st.py
 ```
+
 
 ## 高级用法
 
