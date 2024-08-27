@@ -1,7 +1,10 @@
 # weibo-roast
 基于 agentica 构建了一个微博毒舌AI，疯狂 diss 微博博主。
 
-微博吐槽（weibo-roast）是一个微博毒舌AI，集成了微博数据抓取、处理、分析和生成幽默毒舌评论的功能，通过weibo-crawler爬取指定用户的近20条原创微博，然后调用 GPT 模型生成对微博博主的"吐槽"。
+微博吐槽（weibo-roast）是一个微博毒舌AI，集成了微博数据抓取、处理、分析和生成幽默毒舌评论的功能。
+
+1. 通过`weibo-crawler.py`爬取指定博主的近30条微博
+2. 调用 LLM 模型生成对微博博主的刻薄"吐槽"
 
 ## 快速开始
 
@@ -17,7 +20,7 @@ streamlit run st.py
 ## 高级用法
 
 - 修改 `prompts.py` 中的提示以自定义 AI 生成的内容
-- 修改 `ask_llm.py` 中的 `model` , 推荐效果 gpt-4o > deepseek-coder
+- 修改 `ask_llm.py` 中的 `llm` , 推荐效果 OpenAILLM(gpt-4o) > DeepseekLLM(deepseek-coder) > MoonshotLLM(moonshot-v1-8k)
 
 ## Contact
 
