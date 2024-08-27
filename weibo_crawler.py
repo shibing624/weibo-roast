@@ -71,7 +71,7 @@ class WeiboCrawler:
             "original_video_download": 0,
             "retweet_video_download": 0,
             "download_comment": 1,
-            "comment_max_download_count": 100,
+            "comment_max_download_count": 50,
             "download_repost": 0,
             "repost_max_download_count": 20,
             "user_id_as_folder_name": 0,
@@ -858,6 +858,7 @@ class WeiboCrawler:
 
     def get_weibo_comments(self, weibo, max_count, on_downloaded):
         """
+        Get weibo comments
         :weibo standardlized weibo
         :max_count 最大允许下载数
         :on_downloaded 下载完成时的实例方法回调

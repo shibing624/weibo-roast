@@ -11,13 +11,13 @@
 ```shell
 pip install -r requirements.txt
 cp .env.example .env
-python app.py
+streamlit run st.py
 ```
 
 ## 高级用法
 
 - 修改 `prompts.py` 中的提示以自定义 AI 生成的内容
-- 修改 `app.py` 中的 `model` , 推荐效果 sonnet > Qwen1.5 72B > deepseek-coder
+- 修改 `ask_llm.py` 中的 `model` , 推荐效果 gpt-4o > deepseek-coder
 
 ## Contact
 

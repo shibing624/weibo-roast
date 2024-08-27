@@ -5,4 +5,3 @@ tqdm
 openai
 loguru
 pandas
-rapidfuzz
