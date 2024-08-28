@@ -7,7 +7,7 @@
 from agentica import Message, DeepseekLLM, OpenAILLM, MoonshotLLM
 from dotenv import load_dotenv
 
-load_dotenv()
+# load_dotenv() # default .env path: ~/.agentica/.env
 llm = DeepseekLLM()
 
 
