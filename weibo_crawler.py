@@ -1779,13 +1779,13 @@ class WeiboCrawler:
             logger.exception(e)
 
 def parse_response_users(response):
+    result = []
     try:
         html = etree.HTML(response.text)
         users = html.xpath('//div[starts-with(@class,"card card-user-b")]')
         if not users:
-            return -1
+            return result
 
-        result = []
         for user in users:
             userid = user.xpath('.//div[@class="avator"]/a/@href')
             if userid:
@@ -1798,7 +1798,7 @@ def parse_response_users(response):
         return result
     except Exception as e:
         logger.error(f"Error parsing response: {e}")
-        return -1
+        return result
 
 
 def find_users_by_name(name):

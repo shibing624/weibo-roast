@@ -121,9 +121,14 @@ if "selected_user" not in st.session_state:
 
 user_name = st.text_input("📝 输入博主的昵称")
 if user_name:
-    st.session_state.users = find_users_by_name(user_name)
-else:
-    st.session_state.users = []
+    find_users = find_users_by_name(user_name)
+    if find_users == -1:
+        st.session_state.users = []
+        st.error("😣 找不到你说的博主 请换一个博主试试")
+        st.stop()
+    else:
+        st.session_state.users = find_users
+
 # 显示候选博主列表
 candidates = [user["username"] for user in st.session_state.users[:5]] if st.session_state.users else []
 selected_user_name = st.selectbox("🔍 选择一个博主", options=candidates)
