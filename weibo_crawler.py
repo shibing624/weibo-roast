@@ -70,7 +70,7 @@ class WeiboCrawler:
             "retweet_pic_download": 0,
             "original_video_download": 0,
             "retweet_video_download": 0,
-            "download_comment": 1,
+            "download_comment": 0,
             "comment_max_download_count": 50,
             "download_repost": 0,
             "repost_max_download_count": 20,
