@@ -19,12 +19,40 @@ Demo: [http://180.76.159.247:8501/](http://180.76.159.247:8501/)
 pip install -r requirements.txt
 ```
 
-### 2. 启动streamlit
-> [!TIP]
->
->  **Please set DEEPSEEK_API_KEY in environment: `export DEEPSEEK_API_KEY="sk-..."`.** 
->
+### 2. 配置环境变量
 
+### 2.1 配置 LLM API
+
+find your Deepseek API key in [Deepseek](https://platform.deepseek.com/api_keys) and set it in environment: 
+```shell
+export DEEPSEEK_API_KEY="sk-..."
+````
+
+
+### 2.2 配置微博cookie
+配置自己的cookie（先在网页端登陆微博然后打开https://weibo.cn 然后F12-Network中的Headers->Request Headers-Cookie 
+
+如何获取weibo cookie具体步骤：
+
+1.用Chrome打开<https://passport.weibo.cn/signin/login>；
+
+2.输入微博的用户名、密码，登录，如图所示：
+![](https://picture.cognize.me/cognize/github/weibospider/cookie1.png)
+登录成功后会跳转到<https://m.weibo.cn>;
+
+3.按F12键打开Chrome开发者工具，在地址栏输入并跳转到<https://weibo.cn>，跳转后会显示如下类似界面:
+![](https://picture.cognize.me/cognize/github/weibospider/cookie2.png)
+4.依此点击Chrome开发者工具中的Network->Name中的weibo.cn->Headers->Request Headers，"Cookie:"后的值即为我们要找的cookie值，复制即可，如图所示：
+![](https://picture.cognize.me/cognize/github/weibospider/cookie3.png)
+
+
+set WEIBO_COOKIE in environment: 
+```shell
+export WEIBO_COOKIE="your cookie"
+```
+
+
+### 3. 启动streamlit
 ```shell
 streamlit run st.py
 ```

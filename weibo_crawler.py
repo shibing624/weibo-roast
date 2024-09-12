@@ -28,7 +28,8 @@ import pandas as pd
 pwd_path = os.path.abspath(os.path.dirname(__file__))
 DATA_DIR = os.path.join(pwd_path, "weibo_data")
 
-weibo_cookie = """_T_WM=e5f012b022af6d5ac9801063b2dd29d8; SCF=AstcCz6CVdJWKr33EgYfZNyd2NuBW-JqnMaRgdiBmsneyH8xTrFXkbeoAfi2dQtReQ606X47-vUs3jjE9emFHpk.; SUB=_2A25LzDlWDeRhGeFK6VAS8ijIzDSIHXVooDSerDV6PUJbktAGLW2kkW1NQ5W3mIo22eELY_0ZHmTc4moKa6E0r1jg; SUBP=0033WrSXqPxfM725Ws9jqgMF55529P9D9W5ax55K-1Tg1l2zeakSPyzM5NHD95QNShzEe0zcShMRWs4DqcjZdJLu9K241Ke7entt; SSOLoginState=1724401928; ALF=1726993928"""
+weibo_cookie = os.getenv("WEIBO_COOKIE")
+
 # 日期时间格式
 DTFORMAT = "%Y-%m-%d %H:%M:%S"
 
@@ -1777,6 +1778,7 @@ class WeiboCrawler:
             return self.screen_names  # 添加这一行
         except Exception as e:
             logger.exception(e)
+
 
 def parse_response_users(response):
     result = []
