@@ -106,7 +106,7 @@ st.markdown(
     """
     <div class="header">
         <a href="https://github.com/shibing624/weibo-roast" target="_blank" class="btn-link">
-            ⭐ Github点亮星星
+            ⭐ Github点亮星星[https://github.com/shibing624/weibo-roast]
         </a>
     </div>
     """, unsafe_allow_html=True)
