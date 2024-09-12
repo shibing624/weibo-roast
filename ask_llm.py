@@ -5,8 +5,8 @@
 """
 
 from agentica import Message, DeepseekLLM, OpenAILLM, MoonshotLLM
-from dotenv import load_dotenv
 
+# from dotenv import load_dotenv
 # load_dotenv() # default .env path: ~/.agentica/.env
 llm = DeepseekLLM()
 
@@ -28,7 +28,7 @@ def llm_response(messages):
 
 
 if __name__ == '__main__':
-    prompt = "一句话介绍alpaca?"
+    prompt = "一句话介绍北京?"
     print('llm:', llm)
     r = llm_response(prompt)
     print(r)
