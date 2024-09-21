@@ -273,10 +273,8 @@ class WeiboCrawler:
 
     def user_to_csv(self):
         """将爬取到的用户信息写入csv文件"""
-        file_dir = DATA_DIR
-        if not os.path.isdir(file_dir):
-            os.makedirs(file_dir)
-        file_path = file_dir + os.sep + "users.csv"
+        os.makedirs(DATA_DIR, exist_ok=True)
+        file_path = DATA_DIR + os.sep + "users.csv"
         self.user_csv_file_path = file_path
         result_headers = [
             "用户id",
@@ -334,7 +332,7 @@ class WeiboCrawler:
         # 这里在读取下一个用户的时候很容易被ban，需要优化休眠时长
         # 加一个count，不需要一上来啥都没干就sleep
         if self.long_sleep_count_before_each_user > 0:
-            sleep_time = random.randint(30, 60)
+            sleep_time = random.randint(1, 30)
             # 添加log，否则一般用户不知道以为程序卡了
             logger.info(f"""短暂sleep {sleep_time}秒，避免被ban""")
             sleep(sleep_time)
