@@ -119,7 +119,7 @@ if "selected_user" not in st.session_state:
 user_name = st.text_input("📝 输入博主的昵称")
 if user_name:
     find_users = find_users_by_name(user_name)
-    if find_users == -1:
+    if find_users == -1 or find_users == []:
         st.session_state.users = []
         st.error("😣 找不到你说的博主 请换一个博主试试")
         st.stop()

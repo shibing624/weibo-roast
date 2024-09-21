@@ -30,7 +30,7 @@ load_dotenv()
 pwd_path = os.path.abspath(os.path.dirname(__file__))
 DATA_DIR = os.path.join(pwd_path, "weibo_data")
 
-weibo_cookie = os.getenv("WEIBO_COOKIE")
+weibo_cookie = os.getenv("WEIBO_COOKIE", "")
 
 # 日期时间格式
 DTFORMAT = "%Y-%m-%d %H:%M:%S"
@@ -317,7 +317,10 @@ class WeiboCrawler:
             else self.user_config["since_date"]
         )
         logger.info(
-            f"last_weibo_msg: {last_weibo_msg}, last_weibo_id: {self.last_weibo_id}, last_weibo_date: {self.last_weibo_date}")
+            f"last_weibo_msg: {last_weibo_msg}, "
+            f"last_weibo_id: {self.last_weibo_id}, "
+            f"last_weibo_date: {self.last_weibo_date}"
+        )
 
     def user_to_database(self):
         """将用户信息写入文件/数据库"""
@@ -1803,6 +1806,54 @@ def parse_response_users(response):
         return result
 
 
+similarity_model = None
+user_dict = dict()
+
+
+def find_users_from_local_csv(name):
+    logger.info(f"Searching users from local csv: {name}")
+    output_users = []
+    try:
+        from similarities import SameCharsSimilarity
+    except:
+        logger.error("Please install the similarities library: pip install similarities")
+        return output_users
+
+    # 使用相似度算法找到最相似的用户
+    global similarity_model
+    if similarity_model is None:
+        csv_file = os.path.join(DATA_DIR, 'users.csv')
+
+        usernames = []
+        if not user_dict:
+            # read csv file, 并提取出字段：用户id、昵称
+            df = pd.read_csv(csv_file, encoding='utf-8')
+            for _, row in df.iterrows():
+                user_id = row.get('用户id')
+                username = row.get('昵称')
+                if user_id and username:
+                    user_dict[username] = user_id
+                    usernames.append(username)
+        if not usernames:
+            logger.error("No usernames found in local csv")
+            return output_users
+        usernames = list(set(usernames))
+        logger.info(f"Read {len(usernames)} usernames from local csv, "
+                    f"top3: {usernames[:3]}, user_dict len: {len(user_dict)}")
+        similarity_model = SameCharsSimilarity(corpus=usernames)
+    sim_res = similarity_model.search(name, topn=5)
+    logger.debug(f"Similarity search result: {sim_res}")
+    sim_usernames = [i.get('corpus_doc', '') for i in sim_res[0]]
+
+    for username in sim_usernames:
+        # 'userid': userid, 'username': username
+        user_id = user_dict.get(username)
+        if user_id and username:
+            output_users.append({'userid': user_id, 'username': username})
+    logger.info(f"Found users from local csv: {output_users}, query: {name}")
+    return output_users
+
+
 def find_users_by_name(name):
     url = 'https://s.weibo.com/user'
     headers = {
@@ -1830,13 +1881,15 @@ def find_users_by_name(name):
         response = requests.get(url, headers=headers, params=params)
         if response.status_code == 200:
             users = parse_response_users(response)
+            if not users:
+                users = find_users_from_local_csv(name)
             return users
         else:
             logger.error(f"Failed to get response, status code: {response.status_code}")
-            return -1
+            return find_users_from_local_csv(name)
     except Exception as e:
         logger.error(f"Error fetching UID by name: {e}")
-        return -1
+        return find_users_from_local_csv(name)
 
 
 def get_user_url_by_id(user_id):
@@ -1932,5 +1985,7 @@ if __name__ == "__main__":
     users = find_users_by_name('张伟')
     # return [{'userid': '1746664450', 'username': '大张伟'}, {'userid': '3313256852', 'username': '张伟丽MMA'}, ...]
     print(users)
-    screen_names = crawl_weibo_content_by_userids(['1685786430', '5977585782', '2717789122'])
-    print(f"screen_names: {screen_names}")
+    users = find_users_by_name('美国')
+    print(users)
+    # screen_names = crawl_weibo_content_by_userids(['1685786430', '5977585782', '2717789122'])
+    # print(f"screen_names: {screen_names}")
