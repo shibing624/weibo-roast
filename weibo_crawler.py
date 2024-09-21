@@ -24,7 +24,9 @@ import requests
 from lxml import etree
 from loguru import logger
 import pandas as pd
+from dotenv import load_dotenv
 
+load_dotenv()
 pwd_path = os.path.abspath(os.path.dirname(__file__))
 DATA_DIR = os.path.join(pwd_path, "weibo_data")
 

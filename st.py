@@ -8,20 +8,18 @@ import os
 import streamlit as st
 import json
 from prompts import get_tucao_dangerous_prompt
-from weibo_crawler import crawl_weibo_content_by_userids, find_users_by_name
+from weibo_crawler import crawl_weibo_content_by_userids, find_users_by_name, DATA_DIR
 from ask_llm import llm_response
 from loguru import logger
-
-pwd_path = os.path.abspath(os.path.dirname(__file__))
-DATA_DIR = os.path.join(pwd_path, "weibo_data")
 
 
 def crawl_weibo(user_id: str, user_name: str, max_blogs: int = 15):
     user_id_list = [user_id]
-    logger.debug(f"🔍 搜索博主：{user_name}，链接：{user_id}")
+    logger.info(f"🔍 搜索博主：{user_name}，链接：{user_id}")
     user_file = os.path.join(DATA_DIR, f'{user_name}/{user_id}.json')
     data = None
     if os.path.exists(user_file):
+        logger.debug(f"从缓存中读取博主：{user_name}")
         with open(user_file, 'r', encoding='utf-8') as f:
             data = json.load(f)
     else:
@@ -40,7 +38,6 @@ def crawl_weibo(user_id: str, user_name: str, max_blogs: int = 15):
         st.stop()
     profile = f"{data['user']['screen_name']}, {data['user']['verified_reason']}\n{data['user']['description']}"
     blogs = '\n'.join([weibo['text'].replace("\n", "\\n") for weibo in data['weibo'][:max_blogs]])  # 转义换行符
-    logger.debug(f"博主简介：{profile}\n\n博主微博：{blogs}")
     return profile, blogs
 
 
@@ -147,13 +144,13 @@ if st.session_state.selected_user:
         profile, blogs = crawl_weibo(user_id, user_name)
     logger.info(f"{user_name} 博主简介：{profile}\n\n博主微博：{blogs}")
 
-    tucao_title = "吐槽 🤣"
+    tucao_title = f"吐槽--{user_name} 🤣"
 
     with st.spinner(f"🤣 正在吐槽 {user_name}..."):
         tucao_safe = ""
         for chunk in generate_tucao(profile, blogs):
             tucao_safe += chunk
-            chat_box.markdown(f'<div class="output-card"><h3>{tucao_title}</h3>{tucao_safe}</div>',
+            chat_box.markdown(f'<div class="output-card"><h3>{tucao_title}</h3>\n\n\n{tucao_safe}</div>',
                               unsafe_allow_html=True)
 
     # 完成吐槽后展示气球动画
