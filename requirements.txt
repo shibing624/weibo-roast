@@ -6,3 +6,4 @@ openai
 loguru
 pandas
 streamlit
+pyyaml

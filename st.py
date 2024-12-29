@@ -49,8 +49,9 @@ def generate_tucao(profile: str, blogs: str):
 
         # 流式返回吐槽内容
         for chunk in tucao_dangerous:
-            if chunk:
-                yield chunk
+            if chunk and hasattr(chunk, 'content'):
+                chunk_str = chunk.content
+                yield chunk_str
     except Exception as e:
         logger.error(f"生成吐槽失败: {e}")
         st.error("😣 服务器繁忙，请稍后再试")

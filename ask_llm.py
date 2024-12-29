@@ -4,11 +4,11 @@
 @description:
 """
 
-from agentica import Message, DeepseekLLM, OpenAILLM, MoonshotLLM
+from agentica import Message, DeepSeekChat, OpenAIChat, MoonshotChat
 
 # from dotenv import load_dotenv
 # load_dotenv() # default .env path: ~/.agentica/.env
-llm = DeepseekLLM()
+llm = DeepSeekChat()
 
 
 def llm_response(messages):
