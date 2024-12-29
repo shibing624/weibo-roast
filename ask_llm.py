@@ -4,7 +4,7 @@
 @description:
 """
 
-from agentica import Message, DeepSeekChat, OpenAIChat, MoonshotChat
+from agentica import Message, DeepSeekChat
 
 # from dotenv import load_dotenv
 # load_dotenv() # default .env path: ~/.agentica/.env
