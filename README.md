@@ -8,7 +8,7 @@
 
 ## Demo
 
-Demo: [http://180.76.159.247:8501/](http://180.76.159.247:8501/)
+Demo: [https://roast.mulanai.com/](https://roast.mulanai.com/)
 
 <img src="https://github.com/shibing624/weibo-roast/blob/main/docs/dazhagnwei.png" width="600" />
 
