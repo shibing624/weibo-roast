@@ -4,7 +4,7 @@
 @description:
 """
 
-from agentica import Message, DeepSeekChat
+from agentica import Message, DeepSeekChat, OpenAIChat
 
 # from dotenv import load_dotenv
 # load_dotenv() # default .env path: ~/.agentica/.env
@@ -33,4 +33,4 @@ if __name__ == '__main__':
     r = llm_response(prompt)
     print(r)
     for i in r:
-        print(i)
+        print(i.content)
